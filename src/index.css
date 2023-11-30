@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  image-rendering: pixelated;
+}
+
+:root {
+  font-size: 16px;
+}
+
+body {
+  background-color: #000;
+}
+
+main {
+  display: flex;
+}
+
+aside {
+  background-color: #121212;
+  width: 100%;
+  max-width: 300px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f2f2f2;
+}
+
+.button--click {
+  width: 200px;
+  height: 200px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  animation: spin 60s linear infinite;
+  transition: scale 300ms cubic-bezier(.42,-0.99,.69,1.91);
+  margin: -50px 0 auto;
+}
+
+.button--click > img {
+  width: 100%;
+}
+
+.button--click:hover {
+  scale: 1.03;
+}
+
+.button--click:active {
+  scale: 1;
+  transition-duration: 50ms;
+}
+
+.gravity--display {
+  margin-bottom: auto;
+  margin-top: 50px;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.gravity--quantity {
+  font-size: 3.5rem;
+  font-weight: 900;
+  display: block;
+  margin-bottom: -10px;
+}
+
+.gravity-per-second {
+  display: block;
+  font-size: 0.85rem;
+  padding: 5px;
+  border-radius: 50px;
+  margin-top: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.container-buttons {
+  background-color: #151515;
+  border-left: 2px solid #191919;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-width: 80px;
+  padding: 10px;
+}
+
+.button--planet {
+  align-items: center;
+  background-color: #ddd;
+  border: 4px solid #121212;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  width: 60px;
+}
+
+.button--planet > img {
+  width: 100%;
+  filter: drop-shadow(2px 0 0 black)
+          drop-shadow(-2px 0 0 black)
+          drop-shadow(0 2px 0 black)
+          drop-shadow(0 -2px 0 black);
+}
+
+.button--planet:enabled:hover {
+  background-color: white;
+}
+
+.tooltip, .tooltip--disabled {
+  background-color: white;
+  position: absolute;
+  width: 350px;
+  border-radius: 8px;
+  padding: 10px;
+  right: 0;
+  translate: 100%;
+  margin: 0 -15px 0 0;
+  text-align: left;
+  display: none;
+}
+
+.tooltip::before, .tooltip--disabled::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: -20% -50%;
+  rotate: 45deg;
+  z-index: -1;
+}
+
+.planet--name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.planet--price {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: chocolate;
+  margin-left: 10px;
+}
+
+.planet--description {
+  display: block;
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+}
+
+.tooltip--disabled {
+  padding: 10px;
+  width: 280px;
+}
+
+.tooltip--disabled > span {
+  color: black;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.button--planet:enabled:hover .tooltip {
+  display: block;
+}
+
+.button--planet:disabled:hover .tooltip--disabled {
+  display: block;
+}
+
+.button--planet:disabled {
+  background-color: #999;
+}
+
+.button--planet:disabled > img {
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
