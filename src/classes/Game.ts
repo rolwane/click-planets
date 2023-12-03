@@ -27,6 +27,8 @@ class Game {
 
     this.buyAudio = new Audio("src/assets/audios/buy.mp3");
 
+    this.reloadGame();
+
     this.loadPlanetButtons(planets);
     this.initSun();
 
@@ -35,11 +37,61 @@ class Game {
     setInterval(() => {
       this.incrementGravity(this.getTotalGravitiesPerSecond());
     }, 1000);
+
+    addEventListener("resize", () => this.resize(this.planets));
+  }
+
+  private resize(planets: Planet[]) {
+    planets.forEach((planet) => {
+      planet.initialPositionX = this.canvas.width / 2 - (330 * planet.size) / 2;
+      planet.initialPositionY = this.canvas.height / 2 - (330 * planet.size) / 2;
+    });
+  }
+
+  private reloadGame() {
+    const data = localStorage.getItem("game");
+
+    if (data != null) {
+      const { gravities, savedPlanets, planetsData } = JSON.parse(data);
+
+      savedPlanets.forEach((planetData: TPlanet) => {
+        const planet = new Planet(this.processPlanetData(planetData));
+        this.planets.unshift(planet);
+      });
+
+      planetsData.forEach((planet: TPlanet, index: number) => {
+        planets[index] = planet;
+      });
+
+      this.qntGravityElement.textContent = gravities;
+
+      this.updatedGravitiesPerSecondElement();
+    }
   }
 
   incrementGravity(amount: number) {
     this.qntGravityElement.innerHTML = `${this.getCurrentGravities() + amount}`;
     this.updateButtons(planets);
+  }
+
+  save() {
+    const savedPlanets: TPlanet[] = [];
+
+    this.planets.forEach((planet) => {
+      const savedPlanet = planets.find((p) => p.name == planet.name);
+
+      if (savedPlanet != undefined) {
+        savedPlanets.push(savedPlanet);
+      }
+    });
+
+    const data = {
+      gravities: this.getCurrentGravities(),
+      savedPlanets,
+      planetsData: planets,
+    };
+
+    localStorage.setItem("game", JSON.stringify(data));
   }
 
   updateButtons(planets: TPlanet[]): void {

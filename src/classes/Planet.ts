@@ -4,15 +4,16 @@ class Planet {
   private image: HTMLImageElement;
   private positionX: number;
   private positionY: number;
-  private size: number;
 
-  angle: number;
   readonly name: string;
   readonly gravityPerSecond: number;
   private readonly orbit: number;
   private readonly velocity: number;
-  private readonly initialPositionX: number;
-  private readonly initialPositionY: number;
+
+  size: number;
+  angle: number;
+  initialPositionX: number;
+  initialPositionY: number;
 
   constructor(dataIn: TPlanet) {
     const {
